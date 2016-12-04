@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" url="http://www.mulesoft.org/schema/mule/document-db" prefix="document-db">
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="DocumentDB" description="" icon="" localId="parentConfig" image="" abstract="true" extends="http://www.mulesoft.org/schema/mule/document-db/abstractDocument-dbConnectorGeneric"></global-cloud-connector>
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="DocumentDB: Configuration" description="Global Configuration configuration information." icon="icons/theme.classic/document-db-connector-small.png" localId="config" image="icons/theme.classic/document-db-connector-large.png" abstract="false" extends="http://www.mulesoft.org/schema/mule/document-db/parentConfig" connectivityTesting="off" metaData="static" metaDataKeyDisplay="DISPLAY_NAME" supportsUserDefinedMetaData="false">
+    <attribute-category caption="General" description="Document-db configuration properties.">
+      <group id="document-dbGenericProperties" caption="Basic Settings">
+        <name name="name" caption="Name" description="Give a name to this configuration so it can be later referenced by config-ref." required="true"></name>
+      </group>
+      <group id="general" caption="General">
+        <string defaultValue="https://yourname.documents.azure.com:443/" name="endPoint" caption="End Point" description="Greeting message." supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+        <string defaultValue="m9w4osP3WlhgiO2Z35m6t6dujiqhVJbeljUrSELxtxR6ZYGmp9LSgIr43fg5V2jtG1ClrKMnazsvQmmIAnsS2A==" name="masterKey" caption="Master Key" description="Reply message." supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector caption="Abstractdocument-dbconnectorgeneric" description="Interact with Document-db." icon="icons/theme.classic/document-db-connector-small.png" localId="abstractDocument-dbConnectorGeneric" image="icons/theme.classic/document-db-connector-large.png" abstract="true">
+    <attribute-category caption="General" description="General.">
+      <group id="abstractDocument-dbConnectorGeneric" caption="Basic Settings">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/document-db/config" name="config-ref" caption="Connector Configuration" description="Specify which configuration to use for this invocation." required="true"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector versions="[3.5.0,8.0.0]" aliasId="org.mule.tooling.ui.modules.core.pattern.document-db" caption="DocumentDB" description="" icon="icons/theme.classic/document-db-connector-small.png" localId="document-db-connector" image="icons/theme.classic/document-db-connector-large.png" extends="http://www.mulesoft.org/schema/mule/document-db/abstractDocument-dbConnectorGeneric">
+    <attribute-category caption="General" description="General.">
+      <group id="document-dbConnectorGeneric" caption="Basic Settings">
+        <modeSwitch alwaysCombo="true" name="Document-db operations to execute" caption="Operation" description="Operation.">
+          <no-operation abstractElement="http://www.mulesoft.org/schema/mule/document-db/abstractDocument-dbConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
+          <mode modeId="http://www.mulesoft.org/schema/mule/document-db/create-collection" modeLabel="Create collection"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/document-db/create-database" modeLabel="Create database"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/document-db/insert" modeLabel="Insert"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/document-db/query" modeLabel="Query"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.Object" caption="Create Collection" icon="icons/theme.classic/document-db-connector-small.png" localId="create-collection" image="icons/theme.classic/document-db-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/document-db/abstractDocument-dbConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="collectionID" caption="Collection ID" description="" required="true" javaType="java.lang.String"></string>
+        <string name="databaseID" caption="Database ID" description="" required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.Object" caption="Create Database" icon="icons/theme.classic/document-db-connector-small.png" localId="create-database" image="icons/theme.classic/document-db-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/document-db/abstractDocument-dbConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="databaseID" caption="Database ID" description="" required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.Object" caption="Insert" icon="icons/theme.classic/document-db-connector-small.png" localId="insert" image="icons/theme.classic/document-db-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/document-db/abstractDocument-dbConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="collectionID" caption="Collection ID" description="" required="true" javaType="java.lang.String"></string>
+        <string name="databaseID" caption="Database ID" description="" required="true" javaType="java.lang.String"></string>
+        <string defaultValue="#[payload]" name="document" caption="Document" description="" required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.util.List&lt;com.microsoft.azure.documentdb.Document&gt;" caption="Query" icon="icons/theme.classic/document-db-connector-small.png" localId="query" image="icons/theme.classic/document-db-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/document-db/abstractDocument-dbConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="collectionID" caption="Collection ID" description="" required="true" javaType="java.lang.String"></string>
+        <string name="databaseID" caption="Database ID" description="" required="true" javaType="java.lang.String"></string>
+        <string defaultValue="#[payload]" name="queryString" caption="Query String" description="" required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+</namespace>
